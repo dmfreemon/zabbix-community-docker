@@ -6,8 +6,8 @@ MAINTAINER Jan Garaj info@monitoringartist.com
 ENV \
   ZABBIX_VERSION=tags/2.4.7 \
   STATUS_PAGE_ALLOWED_IP=127.0.0.1 \
-  JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk/bin/java \
-  JAVA=/usr/lib/jvm/java-1.8.0-openjdk/bin/java \
+  JAVA_HOME=/usr/lib/jvm/jre-1.8.0-openjdk \
+  JAVA=/usr/lib/jvm/jre-1.8.0-openjdk/bin/java \
   PHP_date_timezone=UTC \
   PHP_max_execution_time=300 \
   PHP_max_input_time=300 \
@@ -121,7 +121,7 @@ RUN \
               openldap-devel net-tools snmptt sudo && \
  `# reinstall glibc for locales` \
   yum -y -q reinstall glibc-common && \
-  cp /usr/local/etc/zabbix_agend.conf /tmp && \
+  cp /usr/local/etc/zabbix_agentd.conf /tmp && \
   svn co svn://svn.zabbix.com/${ZABBIX_VERSION} /usr/local/src/zabbix && \
   cd /usr/local/src/zabbix && \
   DATE=`date +%Y-%m-%d` && \
@@ -150,7 +150,7 @@ RUN \
   chmod 4710 /usr/sbin/fping && \
   chmod 4710 /usr/sbin/fping6 && \
   cd .. && \
-  cp -f /tmp/zabbix_agend.conf /usr/local/etc/ && \
+  cp -f /tmp/zabbix_agentd.conf /usr/local/etc/ && \
   rm -rf fping-3.10 && \
   rm -rf 3.10.tar.gz && \
   cd /usr/local/src/zabbix/frontends/php && \
